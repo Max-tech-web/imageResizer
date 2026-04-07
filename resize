@@ -1,0 +1,16 @@
+import PIL
+from PIL import Image
+
+from pathlib import Path
+
+
+def resizer(folder_path):
+    folder = Path(folder_path)
+
+    for img_path in folder.iterdir():
+        if img_path.suffix.lower() in [".png", ".jpg", ".jpeg"]:
+            image = Image.open(img_path)
+            image = image.resize((123,123))
+            image.save(folder / f"resized_{img_path.name}")
+    return
+resizer("Images")
